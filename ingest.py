@@ -10,7 +10,7 @@ from langchain_openai import OpenAIEmbeddings
 from config import settings, get_logger
 
 log = get_logger("ingest")
-
+#разбитие на чанки
 def load_kb_docs(kb_dir: str):
     kb_path = Path(kb_dir)
     docs = []
@@ -24,7 +24,7 @@ def load_kb_docs(kb_dir: str):
         except Exception as e:
             log.warning(f"Skip {p.name}: {e}")
     return docs
-
+#эмбеддинги через OpenAI embeddings
 def build_index():
     if not settings.openai_api_key:
         raise RuntimeError("OPENAI_API_KEY пустой. Создайте .env и заполните ключ.")

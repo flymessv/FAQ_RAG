@@ -9,6 +9,7 @@ from langchain_core.documents import Document
 from config import settings, get_logger
 
 log = get_logger("retriever")
+#vec search
 
 def _normalize(mat: np.ndarray) -> np.ndarray:
     norms = np.linalg.norm(mat, axis=1, keepdims=True) + 1e-12

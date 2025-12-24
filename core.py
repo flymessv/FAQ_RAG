@@ -27,6 +27,7 @@ def _get_session_history(session_id: str) -> InMemoryChatMessageHistory:
 def _truncate(s: str, max_chars: int) -> str:
     return s if len(s) <= max_chars else (s[:max_chars] + "\n...[truncated]")
 
+#embending вопроса
 def retrieve_with_scores(question: str):
     retriever = load_retriever()
     emb = OpenAIEmbeddings(api_key=settings.openai_api_key, model=settings.embed_model)
@@ -43,6 +44,7 @@ def retrieve_with_scores(question: str):
         scored.append((f"{src}: {preview}", score))
         ctx_blocks.append(f"[score={score:.3f}]\n{doc.page_content.strip()}")
 
+    #top-k чанков
     top_score = scored[0][1] if scored else 0.0
     context = "\n\n---\n\n".join(ctx_blocks)
     context = _truncate(context, settings.max_context_chars)
